@@ -66,6 +66,7 @@ def checkWin():
     if checkDiag(board)==True or checkHorizontle( board)==True or checkVerticale(board) == True :
         print ( "The winner of this match is " + winner )
         gameRunning=False
+        
 def computer(board):
     while currentPlayer == "O":
         position=random.randint(0,8)
@@ -82,28 +83,30 @@ def switchPlayer():
         currentPlayer="O"
     else:
         currentPlayer="X"
-print("1. Computer")
-print("2. Friend")
-inpu=int(input("Do you want to play with your friend or a computer "))
+def main():
+    print("1. Computer")
+    print("2. Friend")
+    inpu=int(input("Do you want to play with your friend or a computer "))
+    if inpu==1:
+        while gameRunning:
 
-if inpu==1:
-    while gameRunning:
-
-        printBoard(board)
-        playerInput(board)
-        checkWin()
-        checkTie(board)
-        switchPlayer()
-        computer(board)
-        checkWin()
-        checkTie(board)
-elif inpu==2:
-    while gameRunning:
-        printBoard(board)
-        playerInput(board)
-        checkWin()
-        checkTie(board)
-        switchPlayer()
-   
+            printBoard(board)
+            playerInput(board)
+            checkWin()
+            checkTie(board)
+            switchPlayer()
+            computer(board)
+            checkWin()
+            checkTie(board)
+    elif inpu==2:
+        while gameRunning:
+            printBoard(board)
+            playerInput(board)
+            checkWin()
+            checkTie(board)
+            switchPlayer()
+    else:
+        main()
 
 
+main()
