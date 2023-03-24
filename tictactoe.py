@@ -1,4 +1,5 @@
 import random
+
 board=["-","-","-","-","-","-","-","-","-",]
 currentPlayer="X"
 winner=None
@@ -15,8 +16,11 @@ def playerInput(board):
     inp=int(input("enter a number 1-9: "))
     if inp >=1 and inp<=9 and board[inp-1]=='-':
         board[inp-1]=currentPlayer
-    else :
+    elif board[inp-1]=='-' :
         print("Oops player is already in that spot")
+    else :
+        print("You have chosen an already spotted place")
+        playerInput(board)
 
 
 def checkHorizontle(board):
@@ -58,15 +62,19 @@ def checkTie(board):
         gameRunning=False
 def checkWin():
     global gameRunning
+    global winner
     if checkDiag(board)==True or checkHorizontle( board)==True or checkVerticale(board) == True :
         print ( "The winner of this match is " + winner )
         gameRunning=False
 def computer(board):
-    while currentPlayer == "o":
+    while currentPlayer == "O":
         position=random.randint(0,8)
         if board[position]=="-":
-            board[position]=currentPlayer
+            board[position]="0"
             switchPlayer()
+        else:
+            computer(board)
+       
 
 def switchPlayer():
     global currentPlayer
@@ -74,10 +82,28 @@ def switchPlayer():
         currentPlayer="O"
     else:
         currentPlayer="X"
+print("1. Computer")
+print("2. Friend")
+inpu=int(input("Do you want to play with your friend or a computer "))
 
-while gameRunning:
-    printBoard(board)
-    playerInput(board)
-    checkWin()
-    checkTie(board)
-    switchPlayer()
+if inpu==1:
+    while gameRunning:
+
+        printBoard(board)
+        playerInput(board)
+        checkWin()
+        checkTie(board)
+        switchPlayer()
+        computer(board)
+        checkWin()
+        checkTie(board)
+elif inpu==2:
+    while gameRunning:
+        printBoard(board)
+        playerInput(board)
+        checkWin()
+        checkTie(board)
+        switchPlayer()
+   
+
+
