@@ -16,11 +16,11 @@ def playerInput(board):
     inp=int(input("enter a number 1-9: "))
     if inp >=1 and inp<=9 and board[inp-1]=='-':
         board[inp-1]=currentPlayer
-    elif board[inp-1]=='-' :
-        print("Oops player is already in that spot")
-    else :
-        print("You have chosen an already spotted place")
+    elif inp<1 or inp>9 :
+        print("Invalid input has been inserted")
         playerInput(board)
+    elif board[inp-1]!='-' :
+        print("Oops player is already in that spot")
 
 
 def checkHorizontle(board):
@@ -64,6 +64,7 @@ def checkWin():
     global gameRunning
     global winner
     if checkDiag(board)==True or checkHorizontle( board)==True or checkVerticale(board) == True :
+        printBoard(board)
         print ( "The winner of this match is " + winner )
         gameRunning=False
         
